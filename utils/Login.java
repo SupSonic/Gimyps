@@ -1,51 +1,87 @@
 package fr.poec.gestion_rh;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 public class Login {
-	private static String user = "";
-	private static String password = "";
-	private static String login[][] = { { "Machin", "123456" }, { "Martin", "456789" } };
-	static Scanner sc = new Scanner(System.in);
 
-	// Get user login.
-	public static String getUser() {
-		user = sc.nextLine();
-		return "";
+	Login log = new Login();
+
+	try(
+	Statement statement = conn.createStatement())
+	{
+		ResultSet rs = statement.executeQuery("SELECT * FROM login");
+	}while(rs.next())
+	{
+		int id = rs.getInt("id");
+		int idEmployee = rs.getInt("id_employee");
+		String role = rs.getString("role");
+		String user = rs.getString("login");
+		Integer password = rs.getString("MdP");
+
+		list.add(new Login(id, idEmployee, role, user, password));
 	}
+
+	rs.close();catch(
+	SQLException e)
+	{
+		e.printStackTrace();
+	}
+
+	public boolean connection(String user, String password) {
+
+		return connection;
+	}
+
+	// Get id.
+	public int getId() {
+		return id;
+	}
+
+	// Set id.
+	public int SetId() {
+		this.id = id;
+	}
+
+	// Get id_employee.
+	public int getIdEmployee() {
+		return idEmployee;
+	}
+
+	// Set id_employee.
+	public int SetIdEmployee() {
+		this.idEmployee = idEmployee;
+	}
+
+	// Get role.
+	public String getRole() {
+		return role;
+	}
+
+	// Set role.
+	public int SetRole() {
+		this.role = role;
+	}
+
+	// Get user.
+	public String getUser() {
+		return user;
+	}
+	
+	// Set user.
+		public int SetUser() {
+			this.user = user;
+		}
 
 	// Get user password.
-	public static String getPassword() {
-		password = sc.nextLine();
-		return "";
+	public String getPassword() {
+		this.password = password;
 	}
-
-	public static void main(String[] args) {
-		for (int i = 0; i < login.length; i++) {
-			for (int j = 0; j < login[i].length; j++) {
-				System.out.print(login[i][j]);
+	
+	// Set password.
+			public int SetPassword() {
+				return password;
 			}
-			System.out.println();
-		}
-		boolean testLogin = true;
-		// Verify login + password.
-		do {
-			System.out.println("Login = ");
-			getUser();
-			System.out.println(login[0][0]);
-			System.out.println("MdP = ");
-			getPassword();
-			System.out.println(login[0][1]);
-
-			for (int i = 0; i < login.length;) {
-				if (user.equals(login[i][0]) && password.equals(login[i][1])) {
-					System.out.println("Bonjour ");
-					testLogin = false;
-				}
-				i++;
-			}
-
-		} while (testLogin);
-		sc.close();
-	}
 }

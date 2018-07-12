@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import com.google.common.base.Strings;
 import fr.poec.gestion_rh.MysqlDataSource;
+
 /**
  * @author Richard
  *
@@ -26,7 +27,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-	}
+		Scanner scanner = new Scanner(System.in);
+        List<Login> list = new ArrayList<>();
+        Connection conn = createConnection();
+        String id;
+        
 
 }
